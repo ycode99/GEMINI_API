@@ -5,6 +5,9 @@ const bodyParser = require('body-parser');
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+const cors = require('cors');
+app.use(cors());
+
 
 app.get('/', (req, res) => {
     res.send('Hello World! Gemini');
@@ -27,7 +30,7 @@ const generate = async (prompt) => {
 
 //generate();
 
-app.get('/api/content', async(req, res) => {
+app.post('/api/content', async(req, res) => {
     try {
         const data = req.body.question;
         const result = await generate(data);
